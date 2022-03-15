@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 struct TreeNode {
     int info;
@@ -7,6 +8,14 @@ struct TreeNode {
 
 class BinSearchTree {
 public:
+
+    TreeNode * getRoot() {
+        return root;
+    }
+    int getRootInfo() {
+        return root->info;
+    }
+
 
     // traversal
     void traverseNodes() {
@@ -23,6 +32,7 @@ public:
     }
 
 
+    // constructor
     BinSearchTree(int input[], int size) {
         root = buildTree(input, 0, size-1); // this calls your method
     }
@@ -34,17 +44,27 @@ private:
      * to input[end]. So start and end are indices for the array input
      */
     TreeNode* buildTree(int input[], int start, int end) {
-        TreeNode *p = root;
-        TreeNode *q = nullptr;
+        TreeNode *p = new TreeNode;
 
-        if (p == nullptr) {
+        int mid = (start + end)/2;
+        p->info = input[mid];
+        root = p;
 
-        }
+
+
+        return root;
     }
 };
 
 
 
 int main() {
+
+    int input[] = {4, 9, 15, 20, 22, 24, 35, 87};
+    //1 - create the binary search tree given the sorted input
+    BinSearchTree st = BinSearchTree (input,8);
+    //2 - print the tree node values inorder
+    st.traverseNodes(); // this code was given on Canvas earlier
+
 
 }
