@@ -3,7 +3,8 @@ using namespace std;
 
 struct TreeNode {
     int info;
-    TreeNode* left, * right;
+    TreeNode* left = nullptr;
+    TreeNode* right = nullptr;
 };
 
 class BinSearchTree {
@@ -34,7 +35,7 @@ public:
 
     // constructor
     BinSearchTree(int input[], int size) {
-        root = buildTree(input, 0, size-1); // this calls your method
+        root = buildTree(input, 0, size - 1); // this calls your method
     }
 
 private:
@@ -44,18 +45,24 @@ private:
      * to input[end]. So start and end are indices for the array input
      */
     TreeNode* buildTree(int input[], int start, int end) {
-        TreeNode *p = new TreeNode;
+        // base case
+        if(start > end) {
+            return nullptr;
+        }
 
         int mid = (start + end)/2;
-        p->info = input[mid];
+        TreeNode * p = new TreeNode;
+
         root = p;
+        p->info = input[mid];
 
+        p->left = buildTree(input, start, mid - 1);
+        p->right = buildTree(input, mid + 1, end);
 
-
-        return root;
+        return p;
     }
-};
 
+}; // end of class
 
 
 int main() {
@@ -66,5 +73,7 @@ int main() {
     //2 - print the tree node values inorder
     st.traverseNodes(); // this code was given on Canvas earlier
 
+    //cout << "root info: " << st.getRootInfo();
 
 }
+
