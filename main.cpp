@@ -33,34 +33,40 @@ public:
     }
 
 
-    // constructor
+// constructor
     BinSearchTree(int input[], int size) {
+        // edited to size - 1 so that end = the last index of input array
         root = buildTree(input, 0, size - 1); // this calls your method
     }
 
 private:
     TreeNode* root = nullptr;
+
     /**
      * Builds a binary using the elements from input[start]
      * to input[end]. So start and end are indices for the array input
      */
     TreeNode* buildTree(int input[], int start, int end) {
-        // base case
-        if(start > end) {
-            return nullptr;
+
+        // make leaf nodes = to nullptr
+        if (start > end) {
+            return nullptr;    // Base case
         }
+        // find the mid of array in every recursive call
+        int mid = (start + end) / 2;
 
-        int mid = (start + end)/2;
-        TreeNode * p = new TreeNode;
-
+        TreeNode* p = new TreeNode;
         root = p;
         p->info = input[mid];
 
+        // recursive call to make left subtree
         p->left = buildTree(input, start, mid - 1);
+        // recursive call to make right subtree
         p->right = buildTree(input, mid + 1, end);
-
         return p;
+
     }
+
 
 }; // end of class
 
@@ -73,7 +79,6 @@ int main() {
     //2 - print the tree node values inorder
     st.traverseNodes(); // this code was given on Canvas earlier
 
-    //cout << "root info: " << st.getRootInfo();
 
 }
 
