@@ -3,8 +3,7 @@ using namespace std;
 
 struct TreeNode {
     int info;
-    TreeNode* left = nullptr;
-    TreeNode* right = nullptr;
+    TreeNode* left, *right;
 };
 
 class BinSearchTree {
@@ -48,15 +47,14 @@ private:
      */
     TreeNode* buildTree(int input[], int start, int end) {
 
-        // make leaf nodes = to nullptr
+        // Base case
         if (start > end) {
-            return nullptr;    // Base case
+            return nullptr;
         }
         // find the mid of array in every recursive call
         int mid = (start + end) / 2;
 
         TreeNode* p = new TreeNode;
-        root = p;
         p->info = input[mid];
 
         // recursive call to make left subtree
